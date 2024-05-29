@@ -106,10 +106,7 @@ def save_all_images_to_webp(fullpath_image_name: str):
 
     if fullpath_image_name_jpg.suffix == ".jpg":
         with Image.open(fullpath_image_name) as img:
-
             img.save(fullpath_image_name_webp, format="WEBP")
-
-            sys.exit(1)
 
 def create_gifs(fullpath_image_dir: str):
     """Generate gif's from jpg images
@@ -130,7 +127,7 @@ def create_gifs(fullpath_image_dir: str):
     glob_dir = os.path.join(fullpath_image_dir, "*.jpg")
     for infile in glob.glob(glob_dir):
         im = Image.open(infile)
-        modified_img = im.quantize(colors=256, method=Image.MEDIANCUT, dither=0)
+        modified_img = im.quantize(colors=256, method=Image.MAXCOVERAGE, dither=0)
         images.append(modified_img)
 
     images[0].save(fp=os.path.join(fullpath_image_dir, "exercise.gif"), format='GIF', minimize_size=True,
@@ -163,11 +160,7 @@ def main():
             resize_all_images(image)
             #save_all_images_to_webp(image)
 
-
         create_gifs(image_dir)
-        sys.exit(1)
-
-
 
 if __name__ == "__main__":
     main()
