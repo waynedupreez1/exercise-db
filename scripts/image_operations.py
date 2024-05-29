@@ -112,7 +112,7 @@ def save_all_images_to_webp(fullpath_image_name: str):
             sys.exit(1)
 
 def create_gifs(fullpath_image_dir: str):
-    """Generate gif's from webp images
+    """Generate gif's from jpg images
 
     Generate gifs from the images
 
@@ -127,7 +127,7 @@ def create_gifs(fullpath_image_dir: str):
     """
     images = []
 
-    glob_dir = os.path.join(fullpath_image_dir, "*.webp")
+    glob_dir = os.path.join(fullpath_image_dir, "*.jpg")
     for infile in glob.glob(glob_dir):
         im = Image.open(infile)
         modified_img = im.quantize(colors=256, method=Image.MEDIANCUT, dither=0)
@@ -161,7 +161,7 @@ def main():
 
         for image in image_list:
             resize_all_images(image)
-            save_all_images_to_webp(image)
+            #save_all_images_to_webp(image)
 
 
         create_gifs(image_dir)
