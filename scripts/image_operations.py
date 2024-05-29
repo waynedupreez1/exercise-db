@@ -14,7 +14,7 @@ import contextlib
 from PIL import Image
 
 #Global Vars
-IMAGE_DIR_NAME = "images"
+IMAGE_DIR_NAME = "exercises"
 IMAGE_WIDTH = 600
 
 def get_list_dirs_or_files(path: str, list_dirs:bool = True) -> list[str]:
@@ -77,14 +77,14 @@ def resize_all_images(fullpath_image_name: str):
     None
     """
     fullpath_image_name_jpg = pathlib.Path(fullpath_image_name)
-    fullpath_image_name_png = fullpath_image_name_jpg.with_suffix('.png')
+    #fullpath_image_name_png = fullpath_image_name_jpg.with_suffix('.png')
 
     img = Image.open(fullpath_image_name)
     wpercent = IMAGE_WIDTH / float(img.size[0])
     hsize = int((float(img.size[1]) * float(wpercent)))
     img = img.resize((IMAGE_WIDTH, hsize), Image.LANCZOS)
     img.save(fullpath_image_name)
-    img.save(fullpath_image_name_png)
+    #img.save(fullpath_image_name_png)
 
 def create_gifs(fullpath_image_dir: str):
     """Resizes images
