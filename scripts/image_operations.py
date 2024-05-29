@@ -10,7 +10,7 @@ import os
 import pathlib
 import sys
 import glob
-import contextlib
+from tqdm import tqdm
 from PIL import Image
 
 #Global Vars
@@ -76,15 +76,15 @@ def resize_all_images(fullpath_image_name: str):
     Raises:
     None
     """
-    fullpath_image_name_jpg = pathlib.Path(fullpath_image_name)
-    #fullpath_image_name_png = fullpath_image_name_jpg.with_suffix('.png')
+    with Image.open(fullpath_image_name) as img:
 
-    img = Image.open(fullpath_image_name)
-    wpercent = IMAGE_WIDTH / float(img.size[0])
-    hsize = int((float(img.size[1]) * float(wpercent)))
-    img = img.resize((IMAGE_WIDTH, hsize), Image.LANCZOS)
-    img.save(fullpath_image_name)
-    #img.save(fullpath_image_name_png)
+        if img.width > IMAGE_WIDTH:
+            wpercent = IMAGE_WIDTH / float(img.size[0])
+            hsize = int((float(img.size[1]) * float(wpercent)))
+            img = img.resize((IMAGE_WIDTH, hsize), Image.LANCZOS)
+            img.save(fullpath_image_name)
+        else:
+            print(f"image: {fullpath_image_name} width: {img.width} <= {IMAGE_WIDTH}")
 
 def create_gifs(fullpath_image_dir: str):
     """Resizes images
@@ -102,11 +102,11 @@ def create_gifs(fullpath_image_dir: str):
     """
     images = []
 
-    glob_dir = os.path.join(fullpath_image_dir, "*.png")
+    glob_dir = os.path.join(fullpath_image_dir, "*.jpg")
     for infile in glob.glob(glob_dir):
         images.append(Image.open(infile))
 
-    images[0].save(fp=os.path.join(fullpath_image_dir, "exercise.gif"), format='GIF',
+    images[0].save(fp=os.path.join(fullpath_image_dir, "exercise.gif"), format='GIF', minimize_size=True,
                    append_images=images[1:], save_all=True, duration=1000, loop=0, all_mixed=True)
 
 def main():
@@ -128,14 +128,14 @@ def main():
     images_full_path = os.path.join(parent_path, IMAGE_DIR_NAME)
     list_of_image_dirs = get_list_dirs_or_files(images_full_path)
 
-    for image_dir in list_of_image_dirs:
+    for image_dir in tqdm(list_of_image_dirs):
 
         image_list = get_list_dirs_or_files(image_dir, list_dirs=False)
 
         for image in image_list:
             resize_all_images(image)
 
-        create_gifs(image_dir)
+        #create_gifs(image_dir)
 
 
 
