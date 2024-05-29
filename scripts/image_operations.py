@@ -76,6 +76,7 @@ def resize_all_images(fullpath_image_name: str):
     Raises:
     None
     """
+
     with Image.open(fullpath_image_name) as img:
 
         if img.width > IMAGE_WIDTH:
@@ -86,10 +87,34 @@ def resize_all_images(fullpath_image_name: str):
         else:
             print(f"image: {fullpath_image_name} width: {img.width} <= {IMAGE_WIDTH}")
 
-def create_gifs(fullpath_image_dir: str):
-    """Resizes images
+def save_all_images_to_webp(fullpath_image_name: str):
+    """Save images as webp
 
-    Grabs Images and creates a gif
+    Resave all the jpg images as webp
+
+    Args:
+    fullpath_image_name: full path to image name
+
+    Returns:
+    None
+
+    Raises:
+    None
+    """
+    fullpath_image_name_jpg = pathlib.Path(fullpath_image_name)
+    fullpath_image_name_webp = fullpath_image_name_jpg.with_suffix(".webp")
+
+    if fullpath_image_name_jpg.suffix == ".jpg":
+        with Image.open(fullpath_image_name) as img:
+
+            img.save(fullpath_image_name_webp, format="WEBP")
+
+            sys.exit(1)
+
+def create_gifs(fullpath_image_dir: str):
+    """Generate gif's from webp images
+
+    Generate gifs from the images
 
     Args:
     fullpath_image_dir: full path to image dir
@@ -102,7 +127,7 @@ def create_gifs(fullpath_image_dir: str):
     """
     images = []
 
-    glob_dir = os.path.join(fullpath_image_dir, "*.jpg")
+    glob_dir = os.path.join(fullpath_image_dir, "*.webp")
     for infile in glob.glob(glob_dir):
         im = Image.open(infile)
         modified_img = im.quantize(colors=256, method=Image.MEDIANCUT, dither=0)
@@ -136,6 +161,8 @@ def main():
 
         for image in image_list:
             resize_all_images(image)
+            save_all_images_to_webp(image)
+
 
         create_gifs(image_dir)
         sys.exit(1)
