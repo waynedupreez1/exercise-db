@@ -104,7 +104,9 @@ def create_gifs(fullpath_image_dir: str):
 
     glob_dir = os.path.join(fullpath_image_dir, "*.jpg")
     for infile in glob.glob(glob_dir):
-        images.append(Image.open(infile))
+        im = Image.open(infile)
+        modified_img = im.quantize(colors=256, method=Image.MEDIANCUT, dither=0)
+        images.append(modified_img)
 
     images[0].save(fp=os.path.join(fullpath_image_dir, "exercise.gif"), format='GIF', minimize_size=True,
                    append_images=images[1:], save_all=True, duration=1000, loop=0, all_mixed=True)
@@ -135,7 +137,8 @@ def main():
         for image in image_list:
             resize_all_images(image)
 
-        #create_gifs(image_dir)
+        create_gifs(image_dir)
+        sys.exit(1)
 
 
 
