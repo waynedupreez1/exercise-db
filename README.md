@@ -1,8 +1,8 @@
-## Free Exercise DB [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
+# Free Exercise DB [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
 
 Open Public Domain Exercise Dataset in `JSON` format
 
-### What do they look like?
+# What do they look like?
 
 All exercises are stored as seperate `JSON` documents and conform to the following [JSON Schema](./schema.json) eg.
 
@@ -33,7 +33,7 @@ All exercises are stored as seperate `JSON` documents and conform to the followi
 See [Alternate_Incline_Dumbbell_Curl.json](./exercises/Alternate_Incline_Dumbbell_Curl.json)
 
 
-#### Incomplete fields
+## Incomplete fields
 
 The following fields are incomplete in _some_ `JSON` files and in such have had to allow `null` in [schema.json](./schema.json)
 
@@ -41,10 +41,26 @@ The following fields are incomplete in _some_ `JSON` files and in such have had 
 * mechanic
 * equipment
 
-#### Images/Gifs
+## Images/Gifs
 
 Converted All images to gifs
 See Python Scripts
 
-### Special Thanks
+# Validation and checking
+
+Validation of json files and checking it conforms to
+the schema is done through pre-commit hooks
+
+To use pre-commit hooks:
+
+1. Install
+> pip3 install pre-commit
+
+2. Run in folder after clone
+> pre-commit install
+
+3. Run Agains all files
+> pre-commit run --all-files
+
+# Special Thanks
 Forked from [here](https://github.com/yuhonas/free-exercise-db)
