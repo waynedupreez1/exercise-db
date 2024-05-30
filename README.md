@@ -4,7 +4,7 @@ Open Public Domain Exercise Dataset in `JSON` format
 
 # What do they look like?
 
-All exercises are stored as seperate `JSON` documents and conform to the following [JSON Schema](./schema.json) eg.
+All exercises are stored as seperate `JSON` documents and conform to the following [JSON Schema](/schema.json) eg.
 
 ```json
 {
@@ -27,11 +27,11 @@ All exercises are stored as seperate `JSON` documents and conform to the followi
   "images": [
     "Alternate_Incline_Dumbbell_Curl/0.jpg",
     "Alternate_Incline_Dumbbell_Curl/1.jpg"
-  ]
+  ],
+  "gif": "Alternate_Incline_Dumbbell_Curl/exercise.gif"
 }
 ```
-See [Alternate_Incline_Dumbbell_Curl.json](./exercises/Alternate_Incline_Dumbbell_Curl.json)
-
+See [Alternate_Incline_Dumbbell_Curl.json](/exercises/Alternate_Incline_Dumbbell_Curl.json)
 
 ## Incomplete fields
 
@@ -41,10 +41,13 @@ The following fields are incomplete in _some_ `JSON` files and in such have had 
 * mechanic
 * equipment
 
-## Images/Gifs
+## Images and gif's
 
-Converted All images to gifs
-See Python Scripts
+The images are also converted into gifs
+
+![image 0](/exercises/Alternate_Incline_Dumbbell_Curl/0.jpg)
+![image 1](/exercises/Alternate_Incline_Dumbbell_Curl/1.jpg)
+![gif](/exercises/Alternate_Incline_Dumbbell_Curl/exercise.gif)
 
 # Validation and checking
 
