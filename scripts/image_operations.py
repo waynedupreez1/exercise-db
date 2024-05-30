@@ -76,16 +76,18 @@ def resize_all_images(fullpath_image_name: str):
     Raises:
     None
     """
+    fullpath_image_name_jpg = pathlib.Path(fullpath_image_name)
 
-    with Image.open(fullpath_image_name) as img:
+    if fullpath_image_name_jpg.suffix == ".jpg":
+        with Image.open(fullpath_image_name) as img:
 
-        if img.width > IMAGE_WIDTH:
-            wpercent = IMAGE_WIDTH / float(img.size[0])
-            hsize = int((float(img.size[1]) * float(wpercent)))
-            img = img.resize((IMAGE_WIDTH, hsize), Image.LANCZOS)
-            img.save(fullpath_image_name)
-        else:
-            print(f"image: {fullpath_image_name} width: {img.width} <= {IMAGE_WIDTH}")
+            if img.width > IMAGE_WIDTH:
+                wpercent = IMAGE_WIDTH / float(img.size[0])
+                hsize = int((float(img.size[1]) * float(wpercent)))
+                img = img.resize((IMAGE_WIDTH, hsize), Image.LANCZOS)
+                img.save(fullpath_image_name)
+            else:
+                print(f"image: {fullpath_image_name} width: {img.width} <= {IMAGE_WIDTH}")
 
 def save_all_images_to_webp(fullpath_image_name: str):
     """Save images as webp
