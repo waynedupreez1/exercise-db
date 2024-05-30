@@ -91,7 +91,6 @@ def append_gif_json_object(fullpath_exercise_json_name: str):
     """
     path_obj = pathlib.Path(fullpath_exercise_json_name)
     file_name = path_obj.stem
-    print(file_name)
 
     with open(fullpath_exercise_json_name, mode="r", encoding="UTF8") as read_file:
 
