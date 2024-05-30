@@ -133,6 +133,10 @@
           "type": "string"
         }
       ]
+    },
+    "gif":{
+      "type": "string",
+      "pattern": "exercise.gif"
     }
   },
   "required": [
