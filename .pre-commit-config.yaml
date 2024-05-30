@@ -11,5 +11,5 @@ repos:
     rev: 0.28.4
     hooks:
       - id: check-jsonschema
-        files: ^exercises/.*\.json$
+        files: ^exercises\/.*.json$
         args: ["--schemafile", "schema.json"]
