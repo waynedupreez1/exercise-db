@@ -8,7 +8,6 @@ Author: Wayne du Preez 2024-05-30
 
 
 import os
-import sys
 import json
 import pathlib
 from tqdm import tqdm
@@ -47,7 +46,7 @@ def rebuild_all_json_file(list_exercise_full_path_json: list[str]):
             all_exercise_data["all"].append(data)
 
     with open(all_json_file, mode="w", encoding="UTF8") as all_json:
-        all_json.write(json.dumps(all_exercise_data))
+        all_json.write(json.dumps(all_exercise_data, indent=4))
 
 
 def validate_against_schema(fullpath_exercise_json_name: str):
@@ -103,7 +102,7 @@ def append_gif_json_object(fullpath_exercise_json_name: str):
             data["gif"] = f"{file_name}/exercise.gif"
 
             with open(fullpath_exercise_json_name, mode="w", encoding="UTF8") as write_file:
-                write_file.write(json.dumps(data, indent=2))
+                write_file.write(json.dumps(data, indent=4))
         else:
             print(f"gif object already in file: {fullpath_exercise_json_name}")
 
