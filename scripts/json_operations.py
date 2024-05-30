@@ -36,6 +36,8 @@ def rebuild_all_json_file(list_exercise_full_path_json: list[str]):
         "all": []
     }
 
+    list_exercise_full_path_json.sort()
+
     parent_path = utils.get_path_parent_dir()
     all_json_file = os.path.join(parent_path, "all.json")
 
