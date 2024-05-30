@@ -136,7 +136,7 @@
     },
     "gif":{
       "type": "string",
-      "pattern": "exercise.gif"
+      "pattern": "^[0-9a-zA-Z_-]+\/exercise.gif$"
     }
   },
   "required": [
