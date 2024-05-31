@@ -32,9 +32,7 @@ def rebuild_all_json_file(list_exercise_full_path_json: list[str]):
     Raises:
     None
     """
-    all_exercise_data = {
-        "all": []
-    }
+    all_exercise_data = []
 
     list_exercise_full_path_json.sort()
 
@@ -49,7 +47,7 @@ def rebuild_all_json_file(list_exercise_full_path_json: list[str]):
 
         with open(exercise_file_path, mode="r", encoding="UTF8") as exercise_file:
             data = json.load(exercise_file)
-            all_exercise_data["all"].append(data)
+            all_exercise_data.append(data)
 
     with open(all_json_file, mode="w", encoding="UTF8") as all_json:
         all_json.write(json.dumps(all_exercise_data, indent=4))
