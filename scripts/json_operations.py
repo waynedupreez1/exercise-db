@@ -41,6 +41,10 @@ def rebuild_all_json_file(list_exercise_full_path_json: list[str]):
     parent_path = utils.get_path_parent_dir()
     all_json_file = os.path.join(parent_path, "all.json")
 
+
+    all_json_file_zst = os.path.join(parent_path, "all.json.zst")
+    all_json_file_gz = os.path.join(parent_path, "all.json.gz")
+
     for exercise_file_path in list_exercise_full_path_json:
 
         with open(exercise_file_path, mode="r", encoding="UTF8") as exercise_file:
@@ -49,6 +53,17 @@ def rebuild_all_json_file(list_exercise_full_path_json: list[str]):
 
     with open(all_json_file, mode="w", encoding="UTF8") as all_json:
         all_json.write(json.dumps(all_exercise_data, indent=4))
+
+
+    string_dict = json.dumps(all_exercise_data)
+    data_compress_zst = utils.compress_file(bytes(string_dict, encoding="UTF8"), use_zstd=True)
+    data_compress_gz = utils.compress_file(bytes(string_dict, encoding="UTF8"), use_zstd=False)
+
+    with open(all_json_file_zst, mode="bw") as all_json_compressed:
+        all_json_compressed.write(data_compress_zst)
+
+    with open(all_json_file_gz, mode="bw") as all_json_compressed:
+        all_json_compressed.write(data_compress_gz)
 
 
 def validate_against_schema(fullpath_exercise_json_name: str):

@@ -8,6 +8,8 @@ Author: Wayne du Preez 2024-05-29
 import os
 import pathlib
 import sys
+import zstd
+import gzip
 
 def get_list_dirs_or_files(path: str, list_dirs:bool = True) -> list[str]:
     """Return elist of dirs or list of files
@@ -53,3 +55,24 @@ def get_path_parent_dir():
 
     print(f"Path {path} does not exist")
     sys.exit(1)
+
+def compress_file(data: str, use_zstd: bool=True) -> str:
+    """Compress A file
+
+    This function will compress a file using zstd or gzip
+
+    Args:
+    fullpath_file_name: The file we want to create a compression from
+    use_zstd: if true use zstd to compress if false use gzip
+
+    Returns:
+    compressed file
+
+    Raises:
+    None
+    """
+
+    if use_zstd:
+        return zstd.compress(data)
+
+    return gzip.compress(data)
